@@ -61,7 +61,7 @@ public class HotelRepositoryImpl implements IHotelRepository {
 	@Override
 	public List<Hotel> buscarHotelInnerJoin() {
 		// TODO Auto-generated method stub
-		TypedQuery<Hotel> myQuery = this.entityManager.createQuery("SELECT h FROM Hotel h LEFT JOIN h.habitaciones ha", Hotel.class);
+		TypedQuery<Hotel> myQuery = this.entityManager.createQuery("SELECT h FROM Hotel h INNER JOIN h.habitaciones ha", Hotel.class);
 		
 		return myQuery.getResultList();
 	}
