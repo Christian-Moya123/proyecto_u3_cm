@@ -47,22 +47,6 @@ public class FacturaRepositoryImpl implements IFacturaRepository{
 	}
 
 	@Override
-	public List<Factura> buscarFacturaWhereJoin(Integer cantidad) {
-		// TODO Auto-generated method stub
-		TypedQuery<Factura> myQuery = this.entityManager.createQuery("SELECT f FROM Factura f INNER JOIN f.detalles de WHERE de.cantidad = :datoCantidad", Factura.class);
-		myQuery.setParameter("datoCantidad",cantidad);
-		return myQuery.getResultList();
-	}
-
-	@Override
-	public List<Factura> buscarFacturaFetchJoin(Integer cantidad) {
-		// TODO Auto-generated method stub
-		TypedQuery<Factura> myQuery = this.entityManager.createQuery("SELECT f FROM Factura f INNER JOIN f.detalles de ", Factura.class);
-		myQuery.setParameter("datoCantidad",cantidad);
-		return myQuery.getResultList();
-	}
-
-	@Override
 	public List<Factura> buscarFacturaInnerJoin() {
 		// TODO Auto-generated method stub
 		TypedQuery<Factura> myQuery = this.entityManager.createQuery("SELECT f FROM Factura f INNER JOIN f.detalles de", Factura.class);
@@ -77,6 +61,26 @@ public class FacturaRepositoryImpl implements IFacturaRepository{
 		
 		return myQuery.getResultList();
 	}
+	
+	//WHERE JOIN
+	@Override
+	public List<Factura> buscarFacturaWhereJoin(Integer cantidad) {
+		// TODO Auto-generated method stub
+		TypedQuery<Factura> myQuery = this.entityManager.createQuery("SELECT f FROM Factura f, DetalleFactura df WHERE f = df.factura AND df.cantidad  = :datoCantidad", Factura.class);
+		myQuery.setParameter("datoCantidad",cantidad);
+		return myQuery.getResultList();
+	}
+
+	//FECHT JOIN
+	@Override
+	public List<Factura> buscarFacturaFetchJoin(Integer cantidad) {
+		// TODO Auto-generated method stub
+		TypedQuery<Factura> myQuery = this.entityManager.createQuery("SELECT f FROM Factura f JOIN FETCH  f.detalles de WHERE de.cantidad = :datoCantidad", Factura.class);
+		myQuery.setParameter("datoCantidad",cantidad);
+		return myQuery.getResultList();
+	}
+
+
 
 	
 

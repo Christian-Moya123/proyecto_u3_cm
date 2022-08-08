@@ -36,9 +36,15 @@ public class DetalleFactura {
 	@JoinColumn(name = "deta_prod_id")
 	private Producto producto;
 
+	@Override
+	public String toString() {
+		return "DetalleFactura [id=" + id + ", cantidad=" + cantidad + ", subtotal=" + subtotal + "]";
+	}
 	
 	//set y get
 	
+
+
 	public Integer getId() {
 		return id;
 	}

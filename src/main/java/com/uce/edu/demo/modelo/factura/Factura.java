@@ -3,6 +3,7 @@ package com.uce.edu.demo.modelo.factura;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,10 +37,17 @@ public class Factura {
 	@JoinColumn(name = "fact_clie_id")//clave foranea que viene de cliente
 	private Cliente  cliente;
 	
-	@OneToMany(mappedBy = "factura", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "factura", cascade =  CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<DetalleFactura> detalles;
 
 	
+	
+	
+	@Override
+	public String toString() {
+		return "Factura [id=" + id + ", fecha=" + fecha + ", numero=" + numero + ", detalles=" + detalles + "]";
+	}
+
 	//set y get
 	public Integer getId() {
 		return id;
