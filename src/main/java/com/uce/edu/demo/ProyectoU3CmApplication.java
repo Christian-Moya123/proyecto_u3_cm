@@ -1,5 +1,6 @@
 package com.uce.edu.demo;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.jboss.logging.Logger;
@@ -12,6 +13,7 @@ import com.uce.edu.demo.modelo.factura.Factura;
 import com.uce.edu.demo.repository.modelo.Habitacion;
 import com.uce.edu.demo.repository.modelo.Hotel;
 import com.uce.edu.demo.service.IHotelService;
+import com.uce.edu.demo.service.ITransferenciaService;
 import com.uce.edu.demo.taller27.cajero.service.IFacturaService;
 
 @SpringBootApplication
@@ -28,6 +30,9 @@ public class ProyectoU3CmApplication implements CommandLineRunner{
 	
 	@Autowired
 	private IFacturaService facturaService;
+	
+	@Autowired
+	private ITransferenciaService transferenciaService;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -62,25 +67,9 @@ public class ProyectoU3CmApplication implements CommandLineRunner{
 			
 			logger.info("Hotel 3 habitaciones: " + h.getHabitaciones());
 			
-		}
-		
-		*/
-		//////////////////////////////////////////////////////////////////////////////////////////
-		logger.info("JOIN WEHRE");
-		List<Factura> listafacturaWhere = this.facturaService.buscarFacturaWhereJoin(22);
-		
-		for (Factura f: listafacturaWhere) {
-			logger.info("Factura: numero: " + f.getNumero()+ " fecha de factura: "+ f.getFecha());
-				
-		}
-		
-		logger.info("JOIN Fetch");
-		List<Factura> listafacturaFetch = this.facturaService.buscarFacturaFetchJoin(22);
-		
-		for (Factura f: listafacturaFetch) {
-			logger.info("Factura: numero: " + f.getNumero()+ " fecha de factura: "+ f.getFecha());
-			logger.info("Factura con los detalles: " +f.getDetalles());
-		}
+		}*/
+		this.transferenciaService.realizarTransferencia("123", "124", new BigDecimal(1));
+		this.transferenciaService.realizarTransferenciaFachada("123", "124", new BigDecimal(1));
 	}
 
 }
