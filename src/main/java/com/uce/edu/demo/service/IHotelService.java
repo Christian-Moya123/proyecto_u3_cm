@@ -15,7 +15,11 @@ public interface IHotelService {
 	public List<Hotel> buscarHotelInnerJoin();
 	public List<Hotel> buscarHotelOuterJoinLefht();
 
-	
+	public Hotel buscar(Integer id);
+	public Hotel insertar(Hotel hotel);
+	public Hotel actualizar(Hotel hotel);
+	public void eliminar(Integer id);
+	 public List<Hotel> buscarTodos();
 	
 
 }

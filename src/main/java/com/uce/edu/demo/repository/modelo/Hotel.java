@@ -31,8 +31,6 @@ public class Hotel {
 	//(mappedBy = "hotel", cascade =  CascadeType.ALL, fetch = FetchType.EAGER) muy costoso el EAGER
 	@OneToMany(mappedBy = "hotel", cascade =  CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Habitacion> habitaciones;//mapeo para decir que un hotel tiene muchas habitaciones(uno a muchos)
-	
-	
 
 	@Override
 	public String toString() {

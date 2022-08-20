@@ -1,5 +1,6 @@
 package com.uce.edu.demo.repository;
 
+import javax.management.RuntimeErrorException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -18,10 +19,17 @@ public class TransferenciaRepositoryImpl implements ITransferenciaRepository{
 	private EntityManager entityManager;
 
 	@Override
-	@Transactional(value = TxType.MANDATORY)
+	@Transactional(value = TxType.REQUIRED)
 	public void insertar(Transferencia transferencia) {
 		// TODO Auto-generated method stub
 		this.entityManager.persist(transferencia);
+		throw new NullPointerException();
+	}
+
+	@Override
+	public Transferencia buscar(Integer id) {
+		// TODO Auto-generated method stub
+		 return this.entityManager.find(Transferencia.class, id);
 	}
 
 }

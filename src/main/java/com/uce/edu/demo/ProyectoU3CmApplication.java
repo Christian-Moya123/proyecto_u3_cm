@@ -68,8 +68,12 @@ public class ProyectoU3CmApplication implements CommandLineRunner{
 			logger.info("Hotel 3 habitaciones: " + h.getHabitaciones());
 			
 		}*/
-		this.transferenciaService.realizarTransferencia("123", "124", new BigDecimal(1));
+		//this.transferenciaService.realizarTransferencia("123", "124", new BigDecimal(1));
 		this.transferenciaService.realizarTransferenciaFachada("123", "124", new BigDecimal(1));
+		
+		//this.hotelService.buscar(1);
+		
+		
 	}
 
 }

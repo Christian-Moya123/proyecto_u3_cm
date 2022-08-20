@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import com.uce.edu.demo.ProyectoU3CmApplication;
+
 import com.uce.edu.demo.repository.modelo.Hotel;
 
 @Repository
@@ -91,6 +92,47 @@ public class HotelRepositoryImpl implements IHotelRepository {
 		TypedQuery<Hotel> myQuery = this.entityManager.createQuery("SELECT h FROM Hotel h  JOIN FETCH h.habitaciones ha WHERE ha.tipo = : tipoHabitacion", Hotel.class);
 		myQuery.setParameter("tipoHabitacion", tipoHabitacion);
 		return myQuery.getResultList();
+	}
+
+	@Override
+	public Hotel buscar(Integer id) {
+		// TODO Auto-generated method stub
+		logger.info("su busca el id: ");
+		return this.entityManager.find(Hotel.class, id);
+		
+	}
+
+	
+
+	@Override
+	public Hotel actualizar(Hotel hotel) {
+		// TODO Auto-generated method stub
+		return this.entityManager.merge(hotel);
+	}
+
+	@Override
+	public void eliminar(Integer id) {
+		// TODO Auto-generated method stub
+		
+		Hotel doc = this.buscar(id);
+		this.entityManager.remove(doc);
+	}
+
+	@Override
+	public Hotel insertar(Hotel hotel) {
+		// TODO Auto-generated method stub
+		//this.entityManager.persist(hotel);
+		return hotel;
+		
+		
+	}
+
+	@Override
+	public List<Hotel> buscarTodos() {
+		// TODO Auto-generated method stub
+		TypedQuery<Hotel> myTypedQuery = (TypedQuery<Hotel>) this.entityManager
+                .createQuery("SELECT f FROM Hotel f    ", Hotel.class);
+        return myTypedQuery.getResultList();
 	}
 
 	

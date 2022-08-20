@@ -3,6 +3,7 @@ package com.uce.edu.demo.service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import javax.management.RuntimeErrorException;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
@@ -40,6 +41,7 @@ public class TransferenciaServiceImpl implements ITransferenciaService{
 
 		//2. Sumar el monto a la cuenta destino
 		ctaDestino.setSaldo(ctaDestino.getSaldo().add(monto));
+		this.bancariaRepositoru.actualizar(ctaDestino);
 	
 		//3. Insertar a ala transferencia
 		Transferencia trans = new Transferencia();
@@ -50,6 +52,17 @@ public class TransferenciaServiceImpl implements ITransferenciaService{
 		trans.setCuentaDestino(ctaDestino);
 		this.iTransferenciaRepositori.insertar(trans);
 		
+//		if(ctaOrigen.getSaldo().equals("Ahorros")) {
+	//		throw new RuntimeException();
+		//}
+		if(monto.compareTo(saldoOrigen)>0) {
+			throw new RuntimeException();
+			
+		}
+		
+		
+		
+		
 		
 	}
 
@@ -58,6 +71,12 @@ public class TransferenciaServiceImpl implements ITransferenciaService{
 	public void realizarTransferenciaFachada(String ctaOrigen, String ctaDestino, BigDecimal monto) {
 		// TODO Auto-generated method stub
 		this.realizarTransferencia(ctaOrigen, ctaDestino, monto);
+	}
+
+	@Override
+	public Transferencia buscar(Integer id) {
+		// TODO Auto-generated method stub
+		   return this.iTransferenciaRepositori.buscar(id);
 	}
 
 }
