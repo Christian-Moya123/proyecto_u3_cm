@@ -79,13 +79,13 @@ public class ProyectoU3CmApplication implements CommandLineRunner{
 		//this.hotelService.buscar(1);
 		
 		List<String> listaCodigos = new ArrayList<String>();
-		listaCodigos.add("1234");
-		listaCodigos.add("1122");
-		listaCodigos.add("4321");
-		listaCodigos.add("1111");
+		listaCodigos.add("001");
+		listaCodigos.add("002");
+		listaCodigos.add("003");
+		listaCodigos.add("004");
 		
 		logger.info("Se compra los productos");
-		this.facturaService2.compraProductos("1728189521", "1234", listaCodigos);
+		this.facturaService2.compraProductos("aaa1", "1234", listaCodigos);
 		
 		
 	}
