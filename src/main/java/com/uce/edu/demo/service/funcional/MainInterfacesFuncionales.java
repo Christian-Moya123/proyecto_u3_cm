@@ -79,6 +79,7 @@ public class MainInterfacesFuncionales {
 		//FUNCTION
 		//clases
 		//lambdas
+		logger.info("////////////////////////////////");
 		IPersonaFunction<Integer, String> functionLambda = cadena -> { 
 			Integer valor = Integer.parseInt(cadena);
 			Integer valorFinal = valor-2;

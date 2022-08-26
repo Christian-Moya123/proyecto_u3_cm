@@ -20,4 +20,12 @@ public class ConsumoMetodoHighOrder {
 	public String consumirFunction(IPersonaFunction<String, Integer> funcion, Integer valor ) {
 		return funcion.aplicar(valor);
 	}
+	
+	public void consumirConsumer(IPersonaConsumer<String> funcion, String valor) {
+		funcion.accept(valor);
+	}
+	
+	public String consumirUnaryOperator(IPersonaUnaryOperator<String> funcion, String valor) {
+		return funcion.apply(valor);
+	}
 }

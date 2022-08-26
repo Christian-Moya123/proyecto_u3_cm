@@ -7,5 +7,7 @@ public class PersonaConsumerImpl implements IPersonaConsumer<String>{
 		// TODO Auto-generated method stub
 		System.out.println(arg1);
 	}
+	
+	
 
 }
