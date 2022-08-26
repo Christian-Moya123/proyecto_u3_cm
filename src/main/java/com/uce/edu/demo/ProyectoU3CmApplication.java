@@ -1,6 +1,7 @@
 package com.uce.edu.demo;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.jboss.logging.Logger;
@@ -33,6 +34,10 @@ public class ProyectoU3CmApplication implements CommandLineRunner{
 	
 	@Autowired
 	private ITransferenciaService transferenciaService;
+
+	@Autowired
+	private com.uce.edu.demo.service.supermaxi.IFacturaService facturaService2;
+	
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -69,9 +74,18 @@ public class ProyectoU3CmApplication implements CommandLineRunner{
 			
 		}*/
 		//this.transferenciaService.realizarTransferencia("123", "124", new BigDecimal(1));
-		this.transferenciaService.realizarTransferenciaFachada("123", "124", new BigDecimal(1));
+		//this.transferenciaService.realizarTransferenciaFachada("123", "124", new BigDecimal(1));
 		
 		//this.hotelService.buscar(1);
+		
+		List<String> listaCodigos = new ArrayList<String>();
+		listaCodigos.add("1234");
+		listaCodigos.add("1122");
+		listaCodigos.add("4321");
+		listaCodigos.add("1111");
+		
+		logger.info("Se compra los productos");
+		this.facturaService2.compraProductos("1728189521", "1234", listaCodigos);
 		
 		
 	}

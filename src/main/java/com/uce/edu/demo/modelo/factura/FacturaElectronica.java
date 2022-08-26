@@ -1,6 +1,7 @@
 package com.uce.edu.demo.modelo.factura;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,22 +16,22 @@ import javax.persistence.Table;
 public class FacturaElectronica {
 
 	@Id
-	@Column(name ="fael_id")
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fael_name_gerneration")
-	@SequenceGenerator(name = "fael_name_gerneration",sequenceName = "fael_id_seq", allocationSize = 1)
+	@Column(name = "fael_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "fael_seq_id")
+	@SequenceGenerator(name = "fael_seq_id", sequenceName = "fael_seq_id", allocationSize = 1)
 	private Integer id;
-	
-	@Column(name ="fael_numero")
-	private Integer numero;
-	
-	@Column(name ="fael_fecha_creacion")
-	private Integer fechaCreacion;
-	
-	@Column(name ="fael_monto_factura")
-	private BigDecimal montoFactura;
-	
-	@Column(name ="fael_numero_item")
-	private Integer numeroItem;
+
+	@Column(name = "fael_numero")
+	private String numero;
+
+	@Column(name = "fael_fecha")
+	private LocalDateTime fecha;
+
+	@Column(name = "fael_monto")
+	private BigDecimal monto;
+
+	@Column(name = "fael_numero_items")
+	private Integer numeroItems;
 
 	public Integer getId() {
 		return id;
@@ -40,36 +41,36 @@ public class FacturaElectronica {
 		this.id = id;
 	}
 
-	public Integer getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 
-	public Integer getFechaCreacion() {
-		return fechaCreacion;
+	public LocalDateTime getFecha() {
+		return fecha;
 	}
 
-	public void setFechaCreacion(Integer fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
+	public void setFecha(LocalDateTime fecha) {
+		this.fecha = fecha;
 	}
 
-	public BigDecimal getMontoFactura() {
-		return montoFactura;
+	public BigDecimal getMonto() {
+		return monto;
 	}
 
-	public void setMontoFactura(BigDecimal montoFactura) {
-		this.montoFactura = montoFactura;
+	public void setMonto(BigDecimal monto) {
+		this.monto = monto;
 	}
 
-	public Integer getNumeroItem() {
-		return numeroItem;
+	public Integer getNumeroItems() {
+		return numeroItems;
 	}
 
-	public void setNumeroItem(Integer numeroItem) {
-		this.numeroItem = numeroItem;
+	public void setNumeroItems(Integer numeroItems) {
+		this.numeroItems = numeroItems;
 	}
 	
 	

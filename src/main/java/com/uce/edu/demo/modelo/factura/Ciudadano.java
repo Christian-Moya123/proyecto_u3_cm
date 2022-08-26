@@ -1,10 +1,15 @@
 package com.uce.edu.demo.modelo.factura;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -25,8 +30,31 @@ public class Ciudadano {
 	@Column(name="ciud_apellido")
 	private String apellido;
 	
+	@Column(name = "clie_numero_cedula")
+	private String numeroCedula;
+	
 	@OneToOne(mappedBy =  "ciudadano")
 	private Cliente cliente;
+	
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Factura> facturas;
+	
+
+	public String getNumeroCedula() {
+		return numeroCedula;
+	}
+
+	public void setNumeroCedula(String numeroCedula) {
+		this.numeroCedula = numeroCedula;
+	}
+
+	public List<Factura> getFacturas() {
+		return facturas;
+	}
+
+	public void setFacturas(List<Factura> facturas) {
+		this.facturas = facturas;
+	}
 
 	public Integer getId() {
 		return id;

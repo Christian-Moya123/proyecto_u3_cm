@@ -2,8 +2,10 @@ package com.uce.edu.demo.modelo.factura;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,12 +27,15 @@ public class Cliente {
 	
 	@Column(name="clie_numero_tarjeta")
 	private String numeroTarjeta;
+	
+	@Column(name = "clie_numero_cedula")
+	private String numeroCedula;
 
 	@OneToOne
 	@JoinColumn(name="clie_ciud_id")//calve foranea que viene de ciudadano
 	private Ciudadano ciudadano;
 
-	@OneToMany(mappedBy = "cliente")
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Factura> facturas;
 	
 	//set y get
@@ -44,6 +49,14 @@ public class Cliente {
 
 	public String getNumeroTarjeta() {
 		return numeroTarjeta;
+	}
+
+	public String getNumeroCedula() {
+		return numeroCedula;
+	}
+
+	public void setNumeroCedula(String numeroCedula) {
+		this.numeroCedula = numeroCedula;
 	}
 
 	public void setNumeroTarjeta(String numeroTarjeta) {

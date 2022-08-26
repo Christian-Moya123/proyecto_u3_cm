@@ -28,6 +28,12 @@ public class Producto {
 	@Column(name ="prod_precio")
 	private BigDecimal precio;
 	
+	@Column(name = "prod_codigo_barras")
+	private String codigoBarras;
+
+	@Column(name = "prod_cantidad")
+	private Integer cantidad;
+	
 	@OneToMany(mappedBy = "producto")
 	private List<DetalleFactura> detalles;
 
@@ -62,6 +68,23 @@ public class Producto {
 	public void setDetalles(List<DetalleFactura> detalles) {
 		this.detalles = detalles;
 	}
+
+	public String getCodigoBarras() {
+		return codigoBarras;
+	}
+
+	public void setCodigoBarras(String codigoBarras) {
+		this.codigoBarras = codigoBarras;
+	}
+
+	public Integer getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
+	
 	
 	
 	

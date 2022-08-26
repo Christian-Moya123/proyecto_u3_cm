@@ -1,5 +1,6 @@
 package com.uce.edu.demo.modelo.factura;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -33,6 +34,9 @@ public class Factura {
 	@Column(name ="fact_numero")
 	private String numero;
 	
+	@Column(name = "fact_monto")
+	private BigDecimal monto;
+	
 	@ManyToOne
 	@JoinColumn(name = "fact_clie_id")//clave foranea que viene de cliente
 	private Cliente  cliente;
@@ -43,6 +47,15 @@ public class Factura {
 	
 	
 	
+	
+	public BigDecimal getMonto() {
+		return monto;
+	}
+
+	public void setMonto(BigDecimal monto) {
+		this.monto = monto;
+	}
+
 	@Override
 	public String toString() {
 		return "Factura [id=" + id + ", fecha=" + fecha + ", numero=" + numero + ", detalles=" + detalles + "]";
