@@ -85,7 +85,7 @@ public class ProyectoU3CmApplication implements CommandLineRunner{
 		listaCodigos.add("004");
 		
 		logger.info("Se compra los productos");
-		this.facturaService2.compraProductos("aaa1", "1234", listaCodigos);
+		this.facturaService2.compraProductos("1111", "abcd", listaCodigos);
 		
 		
 	}

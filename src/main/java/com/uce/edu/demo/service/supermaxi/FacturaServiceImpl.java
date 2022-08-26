@@ -39,49 +39,39 @@ public class FacturaServiceImpl  implements IFacturaService {
 	@Autowired
 	private IFacturaElectronicaRepository facturaElectronicaRepository;
 	
-	@Transactional(value = TxType.REQUIRED)
-	public void compraProductos(String cedulaCliente, String numeroFactura, List<String> codigos) {
+
+	@Override
+	@Transactional(value = TxType.REQUIRES_NEW)
+	public BigDecimal compraProductos(String cedulaCliente, String numeroFactura, List<String> codigos) {
+		// TODO Auto-generated method stub
+		BigDecimal totalPagar = new BigDecimal(0);
 		Cliente cliente = this.clienteRepository.buscar(cedulaCliente);
 		
-		Factura factura = new Factura();
-		factura.setNumero(numeroFactura);
-		factura.setCliente(cliente);
-		factura.setFecha(LocalDateTime.now());
-
-		BigDecimal monto = new BigDecimal(0);
-
-		DetalleFactura detalle = new DetalleFactura();
-
-		List<DetalleFactura> listaDetalles = new ArrayList<DetalleFactura>();
-		List<Producto> listaProductos = new ArrayList<Producto>();
-
-		for (String c : codigos) {
-			Producto p = this.productoRepository.buscar(c);
-			detalle.setProducto(p);
-			detalle.setCantidad(1);
-			detalle.setSubtotal(p.getPrecio());
-			monto = monto.add(p.getPrecio());
-			listaDetalles.add(detalle);
-			listaProductos.add(p);
+		Factura fact = new Factura();
+		fact.setCliente(cliente);
+		fact.setFecha(LocalDateTime.now());
+		fact.setNumero(numeroFactura);
+		
+		List<DetalleFactura> detalles = new ArrayList<>();
+		
+		for (String codigoProducto : codigos) {
+			DetalleFactura deta = new DetalleFactura();
+		
+			deta.setCantidad(1);
+			deta.setFactura(fact);
+			Producto producto = this.productoRepository.buscar(codigoProducto);
+			deta.setProducto(producto);
+			deta.setSubtotal(deta.getProducto().getPrecio());
+			totalPagar.add(deta.getSubtotal());
+			
+			producto.setCantidad(producto.getCantidad()- deta.getCantidad());
+			this.productoRepository.actualizar(producto);
+			detalles.add(deta);
 		}
-
-		factura.setDetalles(listaDetalles);
-		factura.setMonto(monto);
-
-		// 1. Crear una Factura con los Detalles
-		this.facturaRepository.insertar(factura);
-
-		// 2. Actualizar el stock del Producto
-		this.productoService.actualizarStock(listaProductos);
-
-		// 3. Insertar la factura electrónica
-		FacturaElectronica facturaElectronica = new FacturaElectronica();
-		facturaElectronica.setNumero(numeroFactura);
-		facturaElectronica.setFecha(LocalDateTime.now());
-		facturaElectronica.setMonto(monto);
-		facturaElectronica.setNumeroItems(listaDetalles.size());
-
-		this.facturaElectronicaRepository.insertar(facturaElectronica);
+		fact.setDetalles(detalles);
+		
+		this.facturaRepository.insertar(fact);
+		return totalPagar;
 		
 	}
 }

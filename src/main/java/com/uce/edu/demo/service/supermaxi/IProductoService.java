@@ -5,5 +5,6 @@ import java.util.List;
 import com.uce.edu.demo.modelo.factura.Producto;
 
 public interface IProductoService {
-	public void actualizarStock(List<Producto> productos);
+	
+	public void registrarCompraProducto(String cedula, String numeroFactura, List<String> codigos);
 }

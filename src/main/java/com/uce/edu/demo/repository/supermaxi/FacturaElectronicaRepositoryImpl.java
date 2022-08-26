@@ -13,9 +13,9 @@ public class FacturaElectronicaRepositoryImpl implements IFacturaElectronicaRepo
 	private EntityManager entityManager;
 
 	@Override
-	@Transactional(value = TxType.REQUIRES_NEW)
+	@Transactional(value = TxType.MANDATORY)
 	public void insertar(FacturaElectronica facturaElectronica) {
 		this.entityManager.persist(facturaElectronica);
-		throw new RuntimeException();
+		
 	}
 }
